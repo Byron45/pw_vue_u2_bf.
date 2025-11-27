@@ -1,16 +1,77 @@
 <template>
   <div>
-    <h1>Universidad Central del Ecuador</h1>
-    <h2>Carrera de computación</h2>
+    <h1>{{ tit }}</h1>
+    <p>{{ numero }} <sup>2</sup>={{ calcularCuadrado }}</p>
+    <p>{{ numero }} <sup>2</sup>={{ calcularCuadrado }}</p>
+    <p>{{ numero }} <sup>2</sup>={{ calcularCuadrado }}</p>
+    <p>{{ numero }} <sup>3</sup>={{ calcularCubo }}</p>
+    <p>{{ numero }} <sup>3</sup>={{ obtenerCubo() }}</p>
+
+    <div>
+      <button @:click="incrementar()">+1</button>
+      <button v-on:click="decrementar()">-1</button>
+      <button v-if="mostrar">prueba</button>
+    </div>
   </div>
 </template>
 
 <script>
 export default {
+  data() {
+    return {
+      numero: this.inicio,
+      titulo: "Contador",
+    };
+  },
 
-}
+  methods: {
+    obtenerCuadrado() {
+      console.log("Entro a obtener cuadrado");
+      return this.numero * this.numero;
+    },
+
+    obtenerCubo() {
+      console.log("Entro a obtener cubo");
+      return this.numero * this.numero * this.numero;
+    },
+
+    incrementar() {
+      console.log(this.tit);
+      this.numero++;
+    },
+
+    decrementar() {
+      this.numero--;
+    },
+  },
+
+  computed: {
+    calcularCuadrado() {
+      console.log("Entro a propiedad cuadrado");
+      return this.numero * this.numero;
+    },
+
+    calcularCubo() {
+      return this.numero * this.numero * this.numero;
+    },
+  },
+
+  /*props: ["tit", "inicio", "mostrar"], declaracion basica de props */
+  props: {
+    tit: String,
+    inicio: {
+      type: Number,
+      default: 99,
+      validator(value) {
+        return value > 10;
+      },
+    },
+    mostrar: Boolean,
+  },
+
+  /*String, Number, Boolean, Array, Object, Date, Function BigInt (enteros grandes)*/
+};
 </script>
 
 <style>
-
 </style>
